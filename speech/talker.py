@@ -17,6 +17,7 @@ def say(phrase):
     f = open(f.name, mode="rb")
     music = load("blah", file=f, streaming=False)
     player.queue(music)
+    logger.debug(f"Playing {music.duration}s of audio.")
     player.play()
     sleep(music.duration)
     player.delete()
