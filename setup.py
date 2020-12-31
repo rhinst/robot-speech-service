@@ -11,15 +11,15 @@ setup(
   author_email='rob@hinst.net',
   license='MIT',
   packages=find_packages(),
-  data_files = [
+  data_files=[
     ('config', ['config/default.yaml']),
     ('config/dev', ['config/dev/env.yaml.dist']),
   ],
-  install_requires = [
+  install_requires=[
     'redis==3.5.3',
     'himl==0.7.0',
     'gTTS==2.2.1',
-    'pyglet==1.5.14',
+    'pydub==0.24.1'
   ],
   test_suite='tests',
   tests_require=['pytest==6.2.1'],

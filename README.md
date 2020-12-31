@@ -2,4 +2,7 @@
 Robot speech service
 
 # Requirements
-Install the ffmpeg and libopenal1 packages on your Raspberry Pi
+Install the following packages on your Raspberry Pi:
+* ffmpeg
+* libavcodec-extra
+
