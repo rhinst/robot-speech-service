@@ -1,0 +1,10 @@
+[Unit]
+Description=Robot Speech Service
+
+[Service]
+Type=simple
+WorkingDirectory=/robot/speech
+ExecStart=/robot/speech/venv/bin/speech
+
+[Install]
+WantedBy=multi-user.target
