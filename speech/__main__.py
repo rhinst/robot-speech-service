@@ -20,20 +20,13 @@ def main():
     redis_port = config['redis']['port']
     logger.debug(f"Connecting to redis at {redis_host}:{redis_port}")
     redis_client: Redis = Redis(
-        host=redis_host, port=redis_port
+        host=redis_host, port=redis_port, db=0
     )
     pubsub: PubSub = redis_client.pubsub(ignore_subscribe_messages=True)
     pubsub.subscribe("subsystem.speech.command")
-    while cycle([True]):
-        try:
-            # see if there is a command for me to execute
-            if redis_message := pubsub.get_message():
-                message = redis_message
-                talker.say(message["data"])
-            sleep(0.25)
-        finally:
-            pubsub.close()
-            redis_client.close()
+    for redis_message in pubsub.listen():
+        phrase = redis_message["data"]
+        talker.say(phrase.decode('utf-8'))
 
 
 if __name__ == '__main__':
