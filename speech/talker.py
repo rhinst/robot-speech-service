@@ -14,7 +14,7 @@ def say(phrase):
     tts = gTTS(phrase)
     f = NamedTemporaryFile(mode="wb", delete=False)
     tts.write_to_fp(f)
-    music = AudioSegment.from_mp3(f.name)
+    music = AudioSegment.from_mp3(f.name, parameters=["-hide_banner", "-nostats", "-loglevel", "panic"])
     play(music)
     sleep(5)
     os.unlink(f.name)
