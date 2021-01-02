@@ -1,10 +1,9 @@
 import os
 from tempfile import NamedTemporaryFile
 from time import sleep
+from subprocess import call
 
 from gtts import gTTS
-from pydub import AudioSegment
-from pydub.playback import play
 
 from speech.logging import logger
 
@@ -14,7 +13,6 @@ def say(phrase):
     tts = gTTS(phrase)
     f = NamedTemporaryFile(mode="wb", delete=False)
     tts.write_to_fp(f)
-    music = AudioSegment.from_mp3(f.name, parameters=["-hide_banner", "-nostats", "-loglevel", "panic"])
-    play(music)
+    call(f"mpg123 {f.name}", shell=True)
     sleep(5)
     os.unlink(f.name)
