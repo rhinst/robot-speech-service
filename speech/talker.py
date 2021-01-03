@@ -1,6 +1,5 @@
 import os
 from tempfile import NamedTemporaryFile
-from time import sleep
 from subprocess import call
 
 from gtts import gTTS
@@ -14,5 +13,4 @@ def say(phrase):
     f = NamedTemporaryFile(mode="wb", delete=False)
     tts.write_to_fp(f)
     call(f"mpg123 {f.name}", shell=True)
-    sleep(5)
     os.unlink(f.name)
