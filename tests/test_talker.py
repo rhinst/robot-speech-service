@@ -13,9 +13,7 @@ def test_say():
     test_text = "oh hello there"
     with patch("speech.talker.logger"), patch("speech.talker.gTTS", m_gtts), patch(
         "speech.talker.NamedTemporaryFile", m_tempfile
-    ), patch("speech.talker.call", m_call), patch(
-        "speech.talker.os", m_os
-    ):
+    ), patch("speech.talker.call", m_call), patch("speech.talker.os", m_os):
         say(test_text)
         m_gtts.assert_called_once_with(test_text)
         m_call.assert_called_once_with(f"mpg123 {m_file.name}", shell=True)
